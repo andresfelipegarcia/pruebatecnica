@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('boys','BoyController');
+
+Route::resource('observaciones','ObservacionesController');

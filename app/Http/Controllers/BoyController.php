@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\nino;
+use App\observaciones;
 use App\Http\Requests;
 
 class BoyController extends Controller
 {   
 
     private $path = 'boy';
-    private $path1 = 'observaciones';
+    
 
     /**
      * Display a listing of the resource.
@@ -44,7 +45,10 @@ class BoyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        //registrar usuario
+        
     }
 
     /**
