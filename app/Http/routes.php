@@ -1,5 +1,5 @@
 <?php
-
+use App\observation;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -17,4 +17,18 @@ Route::get('/', function () {
 
 Route::resource('boys','BoyController');
 
-Route::resource('observaciones','ObservacionesController');
+Route::resource('observations', 'ObservationsController');
+
+Route::get('/observation/test', function () {
+
+	/*$users = DB::table('observations')->get();
+
+	foreach ($users as $user)
+	{
+    var_dump($user->id);
+	}*/
+
+	$data = Observation::all();
+
+    return view('observation.test', compact('data'));
+});

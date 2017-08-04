@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\observaciones;
 use App\Http\Requests;
 use Exception;
+
 class ObservacionesController extends Controller
 {
 	private $path = 'observaciones';

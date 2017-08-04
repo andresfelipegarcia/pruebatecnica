@@ -3,17 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\nino;
 use App\observation;
 use App\Http\Requests;
+use Exception;
 
-class BoyController extends Controller
-{   
-
-    private $path = 'boy';
-
-    
-
+class ObservationsController extends Controller
+{
+    private $path = 'observation';
     /**
      * Display a listing of the resource.
      *
@@ -22,10 +18,10 @@ class BoyController extends Controller
     public function index()
     {
         //
-        $data = Nino::all();
+        $data = Observation::all();
         //Enviamos los registros a la vista
         return view($this->path.'.index', compact('data'));
-        
+
     }
 
     /**
@@ -36,9 +32,18 @@ class BoyController extends Controller
     public function create()
     {
         //
-        return view($this->path.'.create');
+        $data = Observation::all();
+        //Enviamos los registros a la vista
+        return compact('data');
     }
 
+    public function test()
+    {
+        //
+        $data = Observation::all();
+        //Enviamos los registros a la vista
+        return view($this->path.'.test');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -47,10 +52,20 @@ class BoyController extends Controller
      */
     public function store(Request $request)
     {
+        //
+        try{
+            $observation = new observation();
+            $observation->observation     = $request->observation;
+            $observation->image    = $request->image;
+            $observation->boy = $request->boy;
+            $observation->save();
 
-
-        //registrar usuario
-        
+            $id = $observation->id;
+            return redirect()->route('boys.index');
+        }
+        catch(Exception $e){
+            return "Fatal error - ".$e->getMessage();
+        }
     }
 
     /**
@@ -73,14 +88,6 @@ class BoyController extends Controller
     public function edit($id)
     {
         //
-        $user = Nino::findOrFail($id);
-        return view($this->path.'.edit',compact('boy'));
-    }
-
-    public function observations()
-    {
-        $observation = Observation::all();
-        return compact('observation');
     }
 
     /**
